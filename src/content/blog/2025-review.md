@@ -5,9 +5,6 @@ pubDate: 'Jan 02 2025'
 heroImage: '../../assets/blog/2025-review-hero.jpeg'
 ---
 
-import { Image } from 'astro:assets';
-import catImage from '../../assets/blog/2025-review-cat.jpeg';
-
 ## はじめに
 
 2025年は仕事もプライベートも大きな変化があった一年でした。転職、結婚、マンション購入と、人生の転機がこんなに重なることがあるんだなと驚いています。慌ただしくも充実した一年を振り返ります。

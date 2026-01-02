@@ -1,9 +1,6 @@
 ---
 import { css } from '../../styled-system/css';
-import { getLangFromUrl, useTranslations } from '../i18n';
 
-const lang = getLangFromUrl(Astro.url);
-const t = useTranslations(lang);
 const today = new Date();
 ---
 
@@ -12,7 +9,7 @@ const today = new Date();
 	color: 'textMuted',
 	textAlign: 'center',
 })}>
-	&copy; {today.getFullYear()} NaokiHaba. {t('footer.rights')}
+	&copy; {today.getFullYear()} NaokiHaba. All rights reserved.
 	<div class={css({
 		display: 'flex',
 		justifyContent: 'center',
