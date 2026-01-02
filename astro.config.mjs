@@ -10,4 +10,11 @@ export default defineConfig({
   site: 'https://naoki-dev.netlify.app',
   integrations: [mdx(), sitemap()],
   adapter: netlify(),
+  i18n: {
+    defaultLocale: 'ja',
+    locales: ['ja', 'en'],
+    routing: {
+      prefixDefaultLocale: false,
+    },
+  },
 });

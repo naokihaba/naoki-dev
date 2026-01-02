@@ -7,6 +7,10 @@ import FormattedDate from '../components/FormattedDate.astro';
 import Header from '../components/Header.astro';
 import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 import { css } from '../../styled-system/css';
+import { getLangFromUrl, useTranslations } from '../i18n';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
 
 const posts = (await getCollection('blog')).sort(
 	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
@@ -14,7 +18,7 @@ const posts = (await getCollection('blog')).sort(
 ---
 
 <!doctype html>
-<html lang="ja">
+<html lang={lang}>
 	<head>
 		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
 	</head>
@@ -22,7 +26,7 @@ const posts = (await getCollection('blog')).sort(
 		<Header />
 		<main class={css({ maxWidth: '960px' })}>
 			<section>
-				<h1 class={css({ fontSize: '2rem', marginBottom: '1.5rem' })}>Latest Posts</h1>
+				<h1 class={css({ fontSize: '2rem', marginBottom: '1.5rem' })}>{t('home.latestPosts')}</h1>
 				<ul class={css({
 					display: 'flex',
 					flexWrap: 'wrap',
