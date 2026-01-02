@@ -1,7 +1,7 @@
 ---
 title: '2025年の振り返り'
 description: '転職、結婚、マンション購入。人生の転機が重なった2025年を振り返ります。'
-pubDate: 'Jan 02 2025'
+pubDate: '2025-12-30'
 heroImage: '../../assets/blog/2025-review-hero.jpeg'
 tags: ['振り返り', 'キャリア', 'ライフイベント']
 ---

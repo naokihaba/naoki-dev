@@ -1,7 +1,7 @@
 ---
 title: '個人ブログ始めました'
 description: 'naoki.dev を開設しました。技術ブログとして日々の学びやアウトプットを発信していきます。'
-pubDate: 'Jan 02 2025'
+pubDate: '2026-01-02'
 tags: ['ブログ', 'Astro']
 ---
 
