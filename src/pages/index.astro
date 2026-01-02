@@ -1,48 +1,91 @@
 ---
+import { Image } from 'astro:assets';
+import { getCollection } from 'astro:content';
 import BaseHead from '../components/BaseHead.astro';
 import Footer from '../components/Footer.astro';
+import FormattedDate from '../components/FormattedDate.astro';
 import Header from '../components/Header.astro';
 import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
+import { css } from '../../styled-system/css';
+
+const posts = (await getCollection('blog')).sort(
+	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+);
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="ja">
 	<head>
 		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
 	</head>
 	<body>
 		<Header />
-		<main>
-			<h1>🧑‍🚀 Hello, Astronaut!</h1>
-			<p>
-				Welcome to the official <a href="https://astro.build/">Astro</a> blog starter template. This template
-				serves as a lightweight, minimally-styled starting point for anyone looking to build a personal
-				website, blog, or portfolio with Astro.
-			</p>
-			<p>
-				This template comes with a few integrations already configured in your
-				<code>astro.config.mjs</code> file. You can customize your setup with
-				<a href="https://astro.build/integrations">Astro Integrations</a> to add tools like Tailwind,
-				React, or Vue to your project.
-			</p>
-			<p>Here are a few ideas on how to get started with the template:</p>
-			<ul>
-				<li>Edit this page in <code>src/pages/index.astro</code></li>
-				<li>Edit the site header items in <code>src/components/Header.astro</code></li>
-				<li>Add your name to the footer in <code>src/components/Footer.astro</code></li>
-				<li>Check out the included blog posts in <code>src/content/blog/</code></li>
-				<li>Customize the blog post page layout in <code>src/layouts/BlogPost.astro</code></li>
-			</ul>
-			<p>
-				Have fun! If you get stuck, remember to
-				<a href="https://docs.astro.build/">read the docs</a>
-				or <a href="https://astro.build/chat">join us on Discord</a> to ask questions.
-			</p>
-			<p>
-				Looking for a blog template with a bit more personality? Check out
-				<a href="https://github.com/Charca/astro-blog-template">astro-blog-template</a>
-				by <a href="https://twitter.com/Charca">Maxi Ferreira</a>.
-			</p>
+		<main class={css({ maxWidth: '960px' })}>
+			<section>
+				<h1 class={css({ fontSize: '2rem', marginBottom: '1.5rem' })}>Latest Posts</h1>
+				<ul class={css({
+					display: 'flex',
+					flexWrap: 'wrap',
+					gap: '2rem',
+					listStyleType: 'none',
+					margin: 0,
+					padding: 0,
+				})}>
+					{
+						posts.map((post, index) => (
+							<li class={css({
+								width: index === 0 ? '100%' : 'calc(50% - 1rem)',
+								marginBottom: index === 0 ? '1rem' : 0,
+								textAlign: index === 0 ? 'center' : 'left',
+								'@media (max-width: 720px)': {
+									width: '100%',
+									textAlign: 'center',
+								},
+							})}>
+								<a href={`/blog/${post.id}/`} class={css({
+									display: 'block',
+									textDecoration: 'none',
+									transition: '0.2s ease',
+									_hover: {
+										'& h4, & .date': { color: 'accent' },
+										'& img': { boxShadow: '0 4px 12px rgba(0, 0, 0, 0.15)' },
+									},
+								})}>
+									{post.data.heroImage && (
+										<Image
+											width={720}
+											height={360}
+											src={post.data.heroImage}
+											alt=""
+											class={css({
+												marginBottom: '0.5rem',
+												borderRadius: '12px',
+												width: index === 0 ? '100%' : 'auto',
+											})}
+										/>
+									)}
+									<h4 class={css({
+										margin: 0,
+										color: 'textHeading',
+										lineHeight: 1.3,
+										fontSize: index === 0 ? '2rem' : '1.25rem',
+										'@media (max-width: 720px)': {
+											fontSize: '1.25rem',
+										},
+									})}>{post.data.title}</h4>
+									<p class={css({
+										margin: '0.5rem 0 0',
+										color: 'textMuted',
+										fontSize: '0.9rem',
+									})}>
+										<FormattedDate date={post.data.pubDate} />
+									</p>
+								</a>
+							</li>
+						))
+					}
+				</ul>
+			</section>
 		</main>
 		<Footer />
 	</body>
