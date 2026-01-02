@@ -17,6 +17,16 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 const { title, description, image = FallbackImage } = Astro.props;
 ---
 
+<!-- Theme initialization (prevents FOUC) -->
+<script is:inline>
+	const theme = (() => {
+		const stored = localStorage.getItem('theme');
+		if (stored) return stored;
+		return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+	})();
+	document.documentElement.dataset.theme = theme;
+</script>
+
 <!-- Global Metadata -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
@@ -29,6 +39,7 @@ const { title, description, image = FallbackImage } = Astro.props;
 	href={new URL('rss.xml', Astro.site)}
 />
 <meta name="generator" content={Astro.generator} />
+<meta name="Hatena::Bookmark" content="nocomment" />
 
 <!-- Font preloads -->
 <link rel="preload" href="/fonts/atkinson-regular.woff" as="font" type="font/woff" crossorigin />
