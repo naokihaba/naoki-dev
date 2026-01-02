@@ -26,3 +26,5 @@ pnpm-debug.log*
 ## Panda
 styled-system
 styled-system-studio
+# Local Netlify folder
+.netlify

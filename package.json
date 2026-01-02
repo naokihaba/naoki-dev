@@ -6,14 +6,12 @@
     "dev": "astro dev",
     "build": "panda codegen && astro build",
     "preview": "astro preview",
-    "preview:cf": "wrangler dev",
-    "deploy": "pnpm build && wrangler deploy",
     "astro": "astro",
     "prepare": "panda codegen"
   },
   "dependencies": {
-    "@astrojs/cloudflare": "^12.6.12",
     "@astrojs/mdx": "^4.3.13",
+    "@astrojs/netlify": "^6.6.3",
     "@astrojs/rss": "^4.0.14",
     "@astrojs/sitemap": "^3.6.0",
     "astro": "^5.16.6",
@@ -21,6 +19,6 @@
   },
   "devDependencies": {
     "@pandacss/dev": "^1.7.2",
-    "wrangler": "^4.54.0"
+    "netlify-cli": "^23.13.0"
   }
 }

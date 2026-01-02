@@ -2,13 +2,12 @@
 
 import mdx from '@astrojs/mdx';
 import sitemap from '@astrojs/sitemap';
+import netlify from '@astrojs/netlify';
 import { defineConfig } from 'astro/config';
-
-import cloudflare from '@astrojs/cloudflare';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://example.com',
+  site: 'https://naoki-dev.netlify.app',
   integrations: [mdx(), sitemap()],
-  adapter: cloudflare(),
+  adapter: netlify(),
 });
