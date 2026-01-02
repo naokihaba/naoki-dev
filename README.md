@@ -48,18 +48,7 @@ semanticTokens: {
 }
 ```
 
-### 4. OGP 画像自動生成
-
-```bash
-pnpm add satori @resvg/resvg-js
-```
-
-- `src/pages/og/[slug].png.ts` で動的に PNG 生成
-- **satori**: React 風の JSX を SVG に変換
-- **@resvg/resvg-js**: SVG を PNG に変換
-- Noto Sans JP フォント（`public/fonts/`）で日本語対応
-
-### 5. Markdown スタイリング
+### 4. Markdown スタイリング
 
 ```bash
 pnpm add github-markdown-css
@@ -69,7 +58,7 @@ pnpm add github-markdown-css
 - ダークモード用スタイルを `BlogPost.astro` に追加
 - 箇条書き（`list-style-type`）を明示的に設定（CSS リセット対策）
 
-### 6. タグ機能
+### 5. タグ機能
 
 #### Content Collection スキーマ
 
@@ -92,7 +81,7 @@ schema: ({ image }) =>
 - `src/pages/tags/index.astro` - タグ一覧ページ（記事数順）
 - `src/pages/tags/[tag].astro` - タグ別記事一覧
 
-### 7. ページネーション
+### 6. ページネーション
 
 `src/pages/[...page].astro` で実装：
 
@@ -105,7 +94,7 @@ export const getStaticPaths = (async ({ paginate }) => {
 }) satisfies GetStaticPaths;
 ```
 
-### 8. 日付表示のローカライズ
+### 7. 日付表示のローカライズ
 
 `src/components/FormattedDate.astro`:
 
@@ -118,7 +107,7 @@ date.toLocaleDateString('ja-JP', {
 // 出力例: 2025年12月18日
 ```
 
-### 9. ブログ記事の作成
+### 8. ブログ記事の作成
 
 `src/content/blog/` に Markdown ファイルを作成：
 
@@ -151,7 +140,6 @@ src/
 ├── pages/
 │   ├── [...page].astro     # トップページ（ページネーション）
 │   ├── blog/[...slug].astro # 記事詳細
-│   ├── og/[slug].png.ts    # OGP 画像生成
 │   └── tags/
 │       ├── index.astro     # タグ一覧
 │       └── [tag].astro     # タグ別記事
