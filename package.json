@@ -1,13 +1,14 @@
 {
   "name": "naoki-dev",
-  "type": "module",
   "version": "0.0.1",
+  "type": "module",
   "scripts": {
     "dev": "astro dev",
     "build": "panda codegen && astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "prepare": "panda codegen"
+    "prepare": "panda codegen",
+    "format": "oxfmt"
   },
   "dependencies": {
     "@astrojs/mdx": "^4.3.13",
@@ -22,6 +23,7 @@
   },
   "devDependencies": {
     "@pandacss/dev": "^1.7.2",
-    "netlify-cli": "^23.13.0"
+    "netlify-cli": "^23.13.0",
+    "oxfmt": "^0.21.0"
   }
 }

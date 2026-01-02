@@ -1,5 +1,4 @@
 ---
-import { Image } from 'astro:assets';
 import { getCollection } from 'astro:content';
 import BaseHead from '../components/BaseHead.astro';
 import Footer from '../components/Footer.astro';
@@ -20,72 +19,59 @@ const posts = (await getCollection('blog')).sort(
 	</head>
 	<body>
 		<Header />
-		<main class={css({ maxWidth: '960px' })}>
-			<section>
-				<h1 class={css({ fontSize: '2rem', marginBottom: '1.5rem' })}>最新の投稿</h1>
-				<ul class={css({
-					display: 'flex',
-					flexWrap: 'wrap',
-					gap: '2rem',
-					listStyleType: 'none',
-					margin: 0,
-					padding: 0,
-				})}>
-					{
-						posts.map((post, index) => (
-							<li class={css({
-								width: index === 0 ? '100%' : 'calc(50% - 1rem)',
-								marginBottom: index === 0 ? '1rem' : 0,
-								textAlign: index === 0 ? 'center' : 'left',
-								'@media (max-width: 720px)': {
-									width: '100%',
-									textAlign: 'center',
+		<main class={css({ maxWidth: '720px', margin: '0 auto', padding: '2rem 1rem' })}>
+			<ul class={css({
+				listStyleType: 'none',
+				margin: 0,
+				padding: 0,
+			})}>
+				{
+					posts.map((post) => (
+						<li class={css({
+							borderBottom: '1px solid',
+							borderColor: 'border',
+							paddingBottom: '1.5rem',
+							marginBottom: '1.5rem',
+							_last: {
+								borderBottom: 'none',
+								marginBottom: 0,
+							},
+						})}>
+							<a href={`/blog/${post.id}/`} class={css({
+								display: 'block',
+								textDecoration: 'none',
+								transition: '0.2s ease',
+								_hover: {
+									'& h2': { color: 'accent' },
 								},
 							})}>
-								<a href={`/blog/${post.id}/`} class={css({
+								<time class={css({
 									display: 'block',
-									textDecoration: 'none',
-									transition: '0.2s ease',
-									_hover: {
-										'& h4, & .date': { color: 'accent' },
-										'& img': { boxShadow: '0 4px 12px rgba(0, 0, 0, 0.15)' },
-									},
+									color: 'textMuted',
+									fontSize: '0.875rem',
+									marginBottom: '0.5rem',
 								})}>
-									{post.data.heroImage && (
-										<Image
-											width={720}
-											height={360}
-											src={post.data.heroImage}
-											alt=""
-											class={css({
-												marginBottom: '0.5rem',
-												borderRadius: '12px',
-												width: index === 0 ? '100%' : 'auto',
-											})}
-										/>
-									)}
-									<h4 class={css({
-										margin: 0,
-										color: 'textHeading',
-										lineHeight: 1.3,
-										fontSize: index === 0 ? '2rem' : '1.25rem',
-										'@media (max-width: 720px)': {
-											fontSize: '1.25rem',
-										},
-									})}>{post.data.title}</h4>
+									<FormattedDate date={post.data.pubDate} />
+								</time>
+								<h2 class={css({
+									margin: 0,
+									color: 'textHeading',
+									fontSize: '1.25rem',
+									lineHeight: 1.4,
+								})}>{post.data.title}</h2>
+								{post.data.description && (
 									<p class={css({
 										margin: '0.5rem 0 0',
 										color: 'textMuted',
 										fontSize: '0.9rem',
-									})}>
-										<FormattedDate date={post.data.pubDate} />
-									</p>
-								</a>
-							</li>
-						))
-					}
-				</ul>
-			</section>
+										lineHeight: 1.6,
+									})}>{post.data.description}</p>
+								)}
+							</a>
+						</li>
+					))
+				}
+			</ul>
 		</main>
 		<Footer />
 	</body>
