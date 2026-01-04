@@ -5,16 +5,20 @@ const today = new Date();
 ---
 
 <footer class={css({
-	padding: '2em 1em 6em 1em',
+	width: '100%',
+	padding: { base: '1.5em 0.75em 4em', md: '2em 1em 6em' },
 	color: 'textMuted',
-	textAlign: 'center',
+	display: 'flex',
+	flexDirection: 'column',
+	alignItems: 'center',
+	fontSize: { base: '0.75rem', md: '0.875rem' },
 })}>
 	&copy; {today.getFullYear()} NaokiHaba. All rights reserved.
 	<div class={css({
 		display: 'flex',
 		justifyContent: 'center',
-		gap: '1em',
-		marginTop: '1em',
+		gap: { base: '0.75em', md: '1em' },
+		marginTop: { base: '0.75em', md: '1em' },
 		'& a': {
 			textDecoration: 'none',
 			color: 'textMuted',

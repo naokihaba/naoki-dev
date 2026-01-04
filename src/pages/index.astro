@@ -1,5 +1,4 @@
 ---
-import type { GetStaticPaths } from 'astro'
 import { getCollection } from 'astro:content'
 import BaseHead from '../components/BaseHead.astro'
 import Footer from '../components/Footer.astro'
@@ -8,57 +7,51 @@ import Header from '../components/Header.astro'
 import { SITE_DESCRIPTION, SITE_TITLE } from '../consts'
 import { css } from '../../styled-system/css'
 
-export const getStaticPaths = (async ({ paginate }) => {
-  const posts = (await getCollection('blog', ({ data }) => data.published)).sort((a, b) => b.data.published_at.valueOf() - a.data.published_at.valueOf())
-  return paginate(posts, { pageSize: 10 })
-}) satisfies GetStaticPaths
-
-const { page } = Astro.props
+const posts = (await getCollection('blog', ({ data }) => data.published)).sort((a, b) => b.data.published_at.valueOf() - a.data.published_at.valueOf())
 ---
 
 <!doctype html>
 <html lang="ja">
   <head>
-    <BaseHead title={page.currentPage === 1 ? SITE_TITLE : `${SITE_TITLE} - Page ${page.currentPage}`} description={SITE_DESCRIPTION} />
+    <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
   </head>
   <body>
     <Header />
-    <main class={css({ maxWidth: '900px', margin: '0 auto', padding: '2rem 1rem' })}>
-      {
-        page.currentPage === 1 && (
-          <div class={css({ marginBottom: '1.5rem', textAlign: 'right' })}>
-            <a
-              href="/tags/"
-              class={css({
-                fontSize: '0.875rem',
-                color: 'textMuted',
-                textDecoration: 'none',
-                _hover: { color: 'accent' },
-              })}
-            >
-              タグ一覧 →
-            </a>
-          </div>
-        )
-      }
+    <main class={css({ maxWidth: '1200px', margin: '0 auto', padding: { base: '1rem 0.75rem', md: '1.5rem 1rem', lg: '2rem 1rem' } })}>
+      <div class={css({ marginBottom: '1.5rem', textAlign: 'right' })}>
+        <a
+          href="/tags/"
+          class={css({
+            fontSize: '0.875rem',
+            color: 'textMuted',
+            textDecoration: 'none',
+            _hover: { color: 'accent' },
+          })}
+        >
+          タグ一覧 →
+        </a>
+      </div>
       <ul
         class={css({
           listStyleType: 'none',
           margin: 0,
           padding: 0,
           display: 'grid',
-          gap: '1.5rem',
+          gridTemplateColumns: { base: '1fr', md: 'repeat(2, 1fr)', lg: 'repeat(3, 1fr)' },
+          gap: { base: '1rem', md: '1.25rem', lg: '1.5rem' },
         })}
       >
         {
-          page.data.map((post) => (
-            <li>
+          posts.map((post) => (
+            <li class={css({ height: '100%' })}>
               <a
                 href={`/blog/${post.id}/`}
                 class={css({
-                  display: 'block',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  height: '100%',
                   textDecoration: 'none',
-                  borderRadius: '16px',
+                  borderRadius: { base: '12px', md: '14px', lg: '16px' },
                   overflow: 'hidden',
                   background: 'card',
                   boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)',
@@ -87,13 +80,13 @@ const { page } = Astro.props
                     })}
                   />
                 </div>
-                <div class={css({ padding: '16px 20px' })}>
+                <div class={css({ padding: { base: '12px 14px', md: '14px 18px', lg: '16px 20px' }, flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'space-between' })}>
                   <h2
                     class={css({
                       margin: 0,
                       marginBottom: '8px',
                       color: 'textHeading',
-                      fontSize: '0.95rem',
+                      fontSize: '0.85rem',
                       fontWeight: 600,
                       lineHeight: 1.5,
                       display: '-webkit-box',
@@ -118,51 +111,6 @@ const { page } = Astro.props
           ))
         }
       </ul>
-
-      {
-        page.lastPage > 1 && (
-          <nav
-            class={css({
-              display: 'flex',
-              justifyContent: 'center',
-              alignItems: 'center',
-              gap: '1rem',
-              marginTop: '2rem',
-              paddingTop: '1.5rem',
-              borderTop: '1px solid',
-              borderColor: 'border',
-            })}
-          >
-            {page.url.prev && (
-              <a
-                href={page.url.prev}
-                class={css({
-                  color: 'accent',
-                  textDecoration: 'none',
-                  _hover: { textDecoration: 'underline' },
-                })}
-              >
-                ← 前のページ
-              </a>
-            )}
-            <span class={css({ color: 'textMuted', fontSize: '0.875rem' })}>
-              {page.currentPage} / {page.lastPage}
-            </span>
-            {page.url.next && (
-              <a
-                href={page.url.next}
-                class={css({
-                  color: 'accent',
-                  textDecoration: 'none',
-                  _hover: { textDecoration: 'underline' },
-                })}
-              >
-                次のページ →
-              </a>
-            )}
-          </nav>
-        )
-      }
     </main>
     <Footer />
 
