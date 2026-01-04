@@ -122,7 +122,7 @@ export async function generateOgImage(options: OgImageOptions): Promise<Buffer> 
           style: "normal",
         },
       ],
-    }
+    },
   );
 
   const png = await sharp(Buffer.from(svg)).png().toBuffer();

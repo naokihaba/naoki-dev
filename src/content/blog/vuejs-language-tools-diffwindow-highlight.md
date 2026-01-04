@@ -31,7 +31,7 @@ Vue.js の公式ドキュメントでは、IDE サポートについて以下の
 以下の図のように、複数のパッケージで構成されています。今回の修正は `@vue/language-core` に関するものです。
 
 ![vuejs/language-tools のアーキテクチャ](https://storage.googleapis.com/zenn-user-upload/bdc0d0cbf1b2-20251208.png)
-*[Community Integration - vuejs/language-tools](https://github.com/vuejs/language-tools/blob/master/README.md#community-integration) より*
+_[Community Integration - vuejs/language-tools](https://github.com/vuejs/language-tools/blob/master/README.md#community-integration) より_
 
 ## 問題：Git 差分表示で色がおかしくなる
 
