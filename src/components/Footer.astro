@@ -5,12 +5,16 @@ const today = new Date();
 ---
 
 <footer class={css({
-	width: '100%',
+	position: 'relative',
+	left: '50%',
+	transform: 'translateX(-50%)',
+	width: '100vw',
 	padding: { base: '1.5em 0.75em 4em', md: '2em 1em 6em' },
 	color: 'textMuted',
 	display: 'flex',
 	flexDirection: 'column',
 	alignItems: 'center',
+	justifyContent: 'center',
 	textAlign: 'center',
 	fontSize: { base: '0.75rem', md: '0.875rem' },
 })}>

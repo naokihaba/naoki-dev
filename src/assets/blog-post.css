@@ -4,6 +4,12 @@
   margin: 0;
 }
 
+@media (max-width: 640px) {
+  .blog-post main {
+    width: calc(100% - 1em);
+  }
+}
+
 .blog-post .hero-image {
   width: 100%;
 }
@@ -33,8 +39,4 @@
 
 .blog-post .last-updated-on {
   font-style: italic;
-}
-
-.blog-post .tags {
-  margin-top: 1em;
 }
