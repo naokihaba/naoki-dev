@@ -18,16 +18,8 @@ function loadFont(): Buffer {
 }
 
 export async function generateOgImage(options: OgImageOptions): Promise<Buffer> {
-  const { title, date } = options;
+  const { title } = options;
   const fontData = loadFont();
-
-  const formattedDate = date
-    ? date.toLocaleDateString("ja-JP", {
-        year: "numeric",
-        month: "long",
-        day: "numeric",
-      })
-    : undefined;
 
   const svg = await satori(
     {
@@ -38,97 +30,79 @@ export async function generateOgImage(options: OgImageOptions): Promise<Buffer> 
           width: "100%",
           display: "flex",
           flexDirection: "column",
-          justifyContent: "center",
-          alignItems: "center",
-          background: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
-          padding: "60px",
+          justifyContent: "space-between",
+          background: "linear-gradient(135deg, #0f172a 0%, #1e3a5f 50%, #0ea5e9 100%)",
+          padding: "80px",
         },
         children: [
+          // メインタイトル（中央寄り）
           {
             type: "div",
             props: {
               style: {
                 display: "flex",
-                flexDirection: "column",
-                justifyContent: "center",
+                flex: 1,
                 alignItems: "center",
-                background: "white",
-                borderRadius: "24px",
-                padding: "60px",
-                width: "100%",
-                height: "100%",
-                boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.25)",
+              },
+              children: {
+                type: "h1",
+                props: {
+                  style: {
+                    fontSize: "56px",
+                    fontWeight: 700,
+                    color: "#ffffff",
+                    lineHeight: 1.3,
+                    margin: 0,
+                    maxWidth: "1200px",
+                  },
+                  children: title,
+                },
+              },
+            },
+          },
+          // フッター（サイト名）
+          {
+            type: "div",
+            props: {
+              style: {
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "space-between",
               },
               children: [
-                // 上部スペーサー
                 {
-                  type: "div",
+                  type: "span",
                   props: {
-                    style: { flex: 1 },
-                    children: null,
+                    style: {
+                      fontSize: "32px",
+                      fontWeight: 700,
+                      color: "#ffffff",
+                    },
+                    children: SITE_TITLE,
                   },
                 },
-                // 中央コンテンツ（タイトル + 日付）
                 {
                   type: "div",
                   props: {
                     style: {
                       display: "flex",
-                      flexDirection: "column",
                       alignItems: "center",
+                      gap: "12px",
                     },
                     children: [
                       {
-                        type: "p",
+                        type: "div",
                         props: {
                           style: {
-                            fontSize: "52px",
-                            fontWeight: 700,
-                            color: "#1a202c",
-                            textAlign: "center",
-                            margin: 0,
-                            lineHeight: 1.3,
-                            maxWidth: "950px",
+                            width: "8px",
+                            height: "8px",
+                            borderRadius: "50%",
+                            background: "#0ea5e9",
                           },
-                          children: title,
+                          children: null,
                         },
                       },
-                      formattedDate && {
-                        type: "p",
-                        props: {
-                          style: {
-                            fontSize: "24px",
-                            color: "#718096",
-                            marginTop: "20px",
-                          },
-                          children: formattedDate,
-                        },
-                      },
-                    ].filter(Boolean),
-                  },
-                },
-                // 下部スペーサー + サイト名
-                {
-                  type: "div",
-                  props: {
-                    style: {
-                      flex: 1,
-                      display: "flex",
-                      alignItems: "flex-end",
-                      justifyContent: "center",
-                    },
-                    children: {
-                      type: "p",
-                      props: {
-                        style: {
-                          fontSize: "28px",
-                          color: "#667eea",
-                          fontWeight: 700,
-                          margin: 0,
-                        },
-                        children: SITE_TITLE,
-                      },
-                    },
+                    ],
                   },
                 },
               ],
