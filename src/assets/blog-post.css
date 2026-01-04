@@ -1,0 +1,40 @@
+.blog-post main {
+  width: calc(100% - 2em);
+  max-width: 100%;
+  margin: 0;
+}
+
+.blog-post .hero-image {
+  width: 100%;
+}
+
+.blog-post .hero-image img {
+  display: block;
+  margin: 0 auto;
+  border-radius: 12px;
+  box-shadow: var(--box-shadow);
+}
+
+.blog-post .title {
+  margin-bottom: 1em;
+  padding: 1em 0;
+  text-align: center;
+  line-height: 1;
+}
+
+.blog-post .title h1 {
+  margin: 0 0 0.5em 0;
+}
+
+.blog-post .date {
+  margin-bottom: 0.5em;
+  color: rgb(var(--gray));
+}
+
+.blog-post .last-updated-on {
+  font-style: italic;
+}
+
+.blog-post .tags {
+  margin-top: 1em;
+}
