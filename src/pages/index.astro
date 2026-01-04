@@ -43,11 +43,13 @@ const posts = (await getCollection('blog', ({ data }) => data.published)).sort((
       >
         {
           posts.map((post) => (
-            <li>
+            <li class={css({ height: '100%' })}>
               <a
                 href={`/blog/${post.id}/`}
                 class={css({
-                  display: 'block',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  height: '100%',
                   textDecoration: 'none',
                   borderRadius: '16px',
                   overflow: 'hidden',
@@ -78,7 +80,7 @@ const posts = (await getCollection('blog', ({ data }) => data.published)).sort((
                     })}
                   />
                 </div>
-                <div class={css({ padding: '16px 20px' })}>
+                <div class={css({ padding: '16px 20px', flex: 1 })}>
                   <h2
                     class={css({
                       margin: 0,
