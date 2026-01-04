@@ -67,15 +67,14 @@ const { page } = Astro.props;
                   />
                 </div>
                 <div class={css({ padding: '1.25rem' })}>
-                  <div class={css({ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '0.75rem' })}>
-                    <time class={css({
-                      color: 'textMuted',
-                      fontSize: '0.8rem',
-                    })}>
-                      <FormattedDate date={post.data.pubDate} />
-                    </time>
-                    <TagList tags={post.data.tags} />
-                  </div>
+                  <time class={css({
+                    display: 'block',
+                    color: 'textMuted',
+                    fontSize: '0.8rem',
+                    marginBottom: '0.5rem',
+                  })}>
+                    <FormattedDate date={post.data.pubDate} />
+                  </time>
                   <h2 class={css({
                     margin: 0,
                     color: 'textHeading',
@@ -91,6 +90,11 @@ const { page } = Astro.props;
                       lineHeight: 1.6,
                       lineClamp: 2,
                     })}>{post.data.description}</p>
+                  )}
+                  {post.data.tags.length > 0 && (
+                    <div class={css({ marginTop: '0.75rem' })}>
+                      <TagList tags={post.data.tags} />
+                    </div>
                   )}
                 </div>
               </a>
