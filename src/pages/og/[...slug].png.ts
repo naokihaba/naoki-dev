@@ -21,7 +21,7 @@ export const GET: APIRoute<Props> = async ({ props }) => {
     date: props.published_at,
   });
 
-  return new Response(png, {
+  return new Response(png as unknown as BodyInit, {
     headers: {
       "Content-Type": "image/png",
     },

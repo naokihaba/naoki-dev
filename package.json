@@ -7,11 +7,13 @@
     "build": "panda codegen && astro build",
     "preview": "astro preview",
     "astro": "astro",
+    "check": "astro check",
     "prepare": "panda codegen",
     "format": "oxfmt",
     "new": "node scripts/new-post.mjs"
   },
   "dependencies": {
+    "@astrojs/check": "^0.9.6",
     "@astrojs/mdx": "^4.3.13",
     "@astrojs/netlify": "^6.6.3",
     "@astrojs/rss": "^4.0.14",
@@ -19,6 +21,7 @@
     "astro": "^5.16.6",
     "satori": "^0.18.3",
     "sharp": "^0.34.3",
+    "typescript": "^5.9.3",
     "zenn-content-css": "^0.2.11",
     "zenn-markdown-html": "^0.2.11"
   },
