@@ -3,7 +3,6 @@ title: 'Zenn記法テスト'
 description: 'zenn-markdown-html の動作確認用テストページ'
 published: false
 published_at: '2026-01-05'
-tags: ['テスト']
 ---
 
 ## メッセージ記法
